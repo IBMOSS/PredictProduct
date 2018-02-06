@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ibm.lotte.model.Contact;
-import com.ibm.lotte.service.impl.ContactRepository;
+import com.ibm.lotte.repository.ContactRepository;
 
 @Controller
 @RequestMapping("/")

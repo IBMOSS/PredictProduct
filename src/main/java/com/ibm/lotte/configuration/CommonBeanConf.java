@@ -1,8 +1,5 @@
 package com.ibm.lotte.configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -12,8 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -44,9 +39,9 @@ public class CommonBeanConf {
 		return restTemplate;
 	}
 
-	private List<HttpMessageConverter<?>> createMessageConverters() {
-		List<HttpMessageConverter<?>> mConverters = new ArrayList<>();
-		mConverters.add(new MappingJackson2HttpMessageConverter());
-		return mConverters;
-	}
+	// private List<HttpMessageConverter<?>> createMessageConverters() {
+	// List<HttpMessageConverter<?>> mConverters = new ArrayList<>();
+	// mConverters.add(new MappingJackson2HttpMessageConverter());
+	// return mConverters;
+	// }
 }

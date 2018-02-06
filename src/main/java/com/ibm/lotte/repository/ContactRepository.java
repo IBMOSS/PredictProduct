@@ -1,4 +1,4 @@
-package com.ibm.lotte.service.impl;
+package com.ibm.lotte.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
