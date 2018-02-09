@@ -10,4 +10,8 @@ public interface PredictService {
 
 	public List<QueryResult> findAll();
 
+	public List<QueryResult> findByQuery(String version);
+
+	public List<QueryResult> findByQuery(String version, String brand_nm);
+
 }

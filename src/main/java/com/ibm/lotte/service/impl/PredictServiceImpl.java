@@ -28,4 +28,14 @@ public class PredictServiceImpl implements PredictService {
 	public List<QueryResult> findAll() {
 		return pRepository.findAll();
 	}
+
+	@Override
+	public List<QueryResult> findByQuery(String version, String brand_nm) {
+		return pRepository.findByVersionAndBrandNm(version, brand_nm);
+	}
+
+	@Override
+	public List<QueryResult> findByQuery(String version) {
+		return pRepository.findByVersion(version);
+	}
 }

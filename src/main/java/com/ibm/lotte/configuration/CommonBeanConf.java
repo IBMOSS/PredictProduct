@@ -18,6 +18,8 @@ public class CommonBeanConf {
 	int maxTotalConn;
 	@Value("${connection.maxperchannel}")
 	int maxPerChannel;
+	@Value("${connection.connectiontimeout}")
+	int connectionTimeout;
 
 	@Bean
 	public ClientHttpRequestFactory createRequestFactory(@Value("${connection.timeout}") String maxConn) {
@@ -25,7 +27,7 @@ public class CommonBeanConf {
 		connectionManager.setMaxTotal(maxTotalConn);
 		connectionManager.setDefaultMaxPerRoute(maxPerChannel);
 
-		RequestConfig config = RequestConfig.custom().setConnectTimeout(100000).build();
+		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).build();
 		CloseableHttpClient httpClient = HttpClientBuilder.create().setConnectionManager(connectionManager)
 				.setDefaultRequestConfig(config).build();
 		return new HttpComponentsClientHttpRequestFactory(httpClient);

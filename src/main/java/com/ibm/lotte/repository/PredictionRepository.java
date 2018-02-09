@@ -12,6 +12,8 @@ public interface PredictionRepository extends CrudRepository<QueryResult, Long> 
 
 	List<QueryResult> findByVersion(String version);
 
+	List<QueryResult> findByVersionAndBrandNm(String version, String brandNm);
+
 	List<QueryResult> findAll();
 
 }

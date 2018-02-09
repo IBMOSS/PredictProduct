@@ -22,6 +22,8 @@ public class HelloRepository {
 	@Autowired
 	RestTemplate restTemplate;
 
+
+
 	public String getName(String name) {
 		log.info(String.format(" name = %s", name));
 		Map<String, String> map = new HashMap<>();

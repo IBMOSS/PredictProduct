@@ -1,18 +1,55 @@
 package com.ibm.lotte.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity // This tells Hibernate to make a table out of this class
+@Data
 public class QueryCondition {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+
 	private String version;
-	private String param1;
+
+	private String brand_nm;
+
+	private String func_nm;
+
+	private String maker_nm;
+
+	private String mat_1_nm;
+
+	private String mat_2_nm;
+
+	private String mat_3_nm;
+
+	private String mat_4_nm;
+
+	private String mat_5_nm;
+
+	private String mat_6_nm;
+
+	private String prod_cat_2_nm;
+
+	private String prod_cat_3_nm;
+
+	private String taste_1_nm;
+
+	private String taste_2_nm;
+
+	private String taste_3_nm;
+
+	private String txtre_1_nm;
+
+	private String txtre_2_nm;
+
+	private String txtre_3_nm;
 /*
  * ....
  */
@@ -26,29 +63,7 @@ public class QueryCondition {
 	// @Column(name = "last_modified_at", updatable = true)
 	// private Date lastModifiedDateTime;
 
-	
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getParam1() {
-		return param1;
-	}
-
-	public void setParam1(String param1) {
-		this.param1 = param1;
-	}
 
 }

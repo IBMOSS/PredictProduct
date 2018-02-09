@@ -33,8 +33,13 @@ public class PredictApiController {
 	}
 
 	@RequestMapping(value = "/predict", method = RequestMethod.GET)
-	public @ResponseBody List<QueryResult> predict() {
-		return pService.findAll();
+	public @ResponseBody List<QueryResult> predict(@RequestParam String version) {
+		return pService.findByQuery(version);
+	}
+
+	@RequestMapping(value = "/predict_by", method = RequestMethod.GET)
+	public @ResponseBody List<QueryResult> predictByQuery(@RequestParam String version, @RequestParam String brand_nm) {
+		return pService.findByQuery(version, brand_nm);
 	}
 
 }
