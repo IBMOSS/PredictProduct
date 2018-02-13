@@ -2,16 +2,16 @@ package com.ibm.lotte.service;
 
 import java.util.List;
 
-import com.ibm.lotte.model.QueryResult;
+import com.ibm.lotte.model.PredictModel;
 
 public interface PredictService {
 
-	public String query(String name);
+    public String query(String name);
 
-	public List<QueryResult> findAll();
+    public List<PredictModel> findAll();
 
-	public List<QueryResult> findByQuery(String version);
+    public List<PredictModel> findByQuery(String version);
 
-	public List<QueryResult> findByQuery(String version, String brand_nm);
+    public List<PredictModel> findByQuery(String version, String condition);
 
 }

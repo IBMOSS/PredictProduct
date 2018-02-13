@@ -2,18 +2,17 @@ package com.ibm.lotte.repository;
 
 import java.util.List;
 
+import com.ibm.lotte.model.PredictModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ibm.lotte.model.QueryResult;
-
 @Repository
-public interface PredictionRepository extends CrudRepository<QueryResult, Long> {
+public interface PredictionRepository extends CrudRepository<PredictModel, Long> {
 
-	List<QueryResult> findByVersion(String version);
+	List<PredictModel> findByVersion(String version);
 
-	List<QueryResult> findByVersionAndBrandNm(String version, String brandNm);
+	List<PredictModel> findByVersionAndCondition(String version, String condition);
 
-	List<QueryResult> findAll();
+	List<PredictModel> findAll();
 
 }

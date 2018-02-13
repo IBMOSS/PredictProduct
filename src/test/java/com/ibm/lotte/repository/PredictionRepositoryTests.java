@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import com.ibm.lotte.model.PredictModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,24 +28,26 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ibm.lotte.model.QueryResult;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class PredictionRepositoryTests {
-	@Autowired
-	private TestEntityManager entityManager;
+    @Autowired
+    private TestEntityManager entityManager;
 
-	@Autowired
-	private PredictionRepository predictions;
+    @Autowired
+    private PredictionRepository predictions;
 
-	@Test
-	public void testFindByLastName() {
-		QueryResult result = new QueryResult("0", "brand_nm0", "func_nm0", "maker_nm0", "mat_1_nm0", "mat_2_nm0", "mat_3_nm0", "mat_4_nm0", "mat_5_nm0", "mat_6_nm0", "prod_cat_2_nm0", "prod_cat_3_nm0", "taste_1_nm0", "taste_2_nm0", "taste_3_nm0", "txtre_1_nm0", "txtre_2_nm0", "txtre_3_nm0", "key_nm0", 10);
-		entityManager.persist(result);
+    @Test
+    public void testFindByLastName() {
+        String version = "0";
+        String condition = "brand_nm0_func_nm0_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_taste_3_nm0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0";
+        PredictModel result = new PredictModel( "0", condition, "key_nm0", 10 );
 
-		List<QueryResult> findByLastName = predictions.findByVersion(result.getVersion());
+        entityManager.persist( result );
 
-		assertThat(findByLastName).extracting(QueryResult::getKeyNm).containsOnly(result.getKeyNm());
-	}
+        List<PredictModel> findResult = predictions.findByVersionAndCondition( version, condition );
+
+        assertThat( findResult ).extracting( PredictModel::getKeyNm ).containsOnly( result.getKeyNm() );
+    }
 }

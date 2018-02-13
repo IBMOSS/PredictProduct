@@ -1,16 +1,14 @@
 package com.ibm.lotte.controller;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.ibm.lotte.model.PredictModel;
+import com.ibm.lotte.model.PredictModelQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.ibm.lotte.model.QueryResult;
-import com.ibm.lotte.service.HelloService;
 import com.ibm.lotte.service.PredictService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,26 +18,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PredictApiController {
 
-	@Autowired
-	HelloService hService;
+    @Autowired
+    PredictService predictService;
 
-	@Autowired
-	PredictService pService;
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String hello(@RequestParam(name = "name") String name) {
-		log.info(String.format("PredictApiController name = %s", name));
-		return hService.getName(name);
-	}
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    public @ResponseBody
+    List<PredictModel> predictOneBy(@RequestBody PredictModelQuery condition) {
+        return predictService.findByQuery( condition.getVersion(), condition.toCondition() ).stream()
+                .sorted( Comparator.comparing( PredictModel::getPred ).reversed() ).collect( Collectors.toList() );
+    }
 
-	@RequestMapping(value = "/predict", method = RequestMethod.GET)
-	public @ResponseBody List<QueryResult> predict(@RequestParam String version) {
-		return pService.findByQuery(version);
-	}
+    @RequestMapping(value = "/findgroup", method = RequestMethod.POST)
+    public @ResponseBody
+    List<PredictModel> predictGroupBy(@RequestBody PredictModelQuery condition) {
 
-	@RequestMapping(value = "/predict_by", method = RequestMethod.GET)
-	public @ResponseBody List<QueryResult> predictByQuery(@RequestParam String version, @RequestParam String brand_nm) {
-		return pService.findByQuery(version, brand_nm);
-	}
-
+        return predictService.findAll().stream().sorted( Comparator.comparing( PredictModel::getPred ).reversed() ).collect( Collectors.toList() );
+    }
 }

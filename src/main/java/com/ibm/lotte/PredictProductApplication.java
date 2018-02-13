@@ -1,21 +1,22 @@
 package com.ibm.lotte;
 
+import com.ibm.lotte.model.PredictModel;
+import com.ibm.lotte.model.PredictVersion;
+import com.ibm.lotte.repository.PredictionRepository;
+import com.ibm.lotte.repository.VersionRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.ibm.lotte.model.QueryResult;
-import com.ibm.lotte.repository.PredictionRepository;
-
-import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
 @Slf4j
 public class PredictProductApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PredictProductApplication.class, args);
+        SpringApplication.run( PredictProductApplication.class, args );
     }
 
     // @Bean
@@ -38,28 +39,50 @@ public class PredictProductApplication {
     // };
     // }
 
+    @Autowired
+    PredictionRepository repository;
+    @Autowired
+    VersionRepository versionRepository;
+
     @Bean
-    public CommandLineRunner loadData(PredictionRepository repository) {
+    public CommandLineRunner loadData() {
         return (args) -> {
             // save a couple of customers
-            repository.save(new QueryResult("0", "brand_nm0", "func_nm0", "maker_nm0", "mat_1_nm0", "mat_2_nm0", "mat_3_nm0", "mat_4_nm0", "mat_5_nm0", "mat_6_nm0", "prod_cat_2_nm0", "prod_cat_3_nm0", "taste_1_nm0", "taste_2_nm0", "taste_3_nm0", "txtre_1_nm0", "txtre_2_nm0", "txtre_3_nm0", "key_nm0", 10));
-            repository.save(new QueryResult("1", "brand_nm1", "func_nm1", "maker_nm1", "mat_1_nm1", "mat_2_nm1", "mat_3_nm1", "mat_4_nm1", "mat_5_nm1", "mat_6_nm1", "prod_cat_2_nm1", "prod_cat_3_nm1", "taste_1_nm1", "taste_2_nm1", "taste_3_nm1", "txtre_1_nm1", "txtre_2_nm1", "txtre_3_nm1", "key_nm1", 101));
-            repository.save(new QueryResult("2", "brand_nm2", "func_nm2", "maker_nm2", "mat_1_nm2", "mat_2_nm2", "mat_3_nm2", "mat_4_nm2", "mat_5_nm2", "mat_6_nm2", "prod_cat_2_nm2", "prod_cat_3_nm2", "taste_1_nm2", "taste_2_nm2", "taste_3_nm2", "txtre_1_nm2", "txtre_2_nm2", "txtre_3_nm2", "key_nm2", 102));
-            repository.save(new QueryResult("3", "brand_nm3", "func_nm3", "maker_nm3", "mat_1_nm3", "mat_2_nm3", "mat_3_nm3", "mat_4_nm3", "mat_5_nm3", "mat_6_nm3", "prod_cat_2_nm3", "prod_cat_3_nm3", "taste_1_nm3", "taste_2_nm3", "taste_3_nm3", "txtre_1_nm3", "txtre_2_nm3", "txtre_3_nm3", "key_nm3", 103));
-            repository.save(new QueryResult("4", "brand_nm4", "func_nm4", "maker_nm4", "mat_1_nm4", "mat_2_nm4", "mat_3_nm4", "mat_4_nm4", "mat_5_nm4", "mat_6_nm4", "prod_cat_2_nm4", "prod_cat_3_nm4", "taste_1_nm4", "taste_2_nm4", "taste_3_nm4", "txtre_1_nm4", "txtre_2_nm4", "txtre_3_nm4", "key_nm4", 104));
-            repository.save(new QueryResult("5", "brand_nm5", "func_nm5", "maker_nm5", "mat_1_nm5", "mat_2_nm5", "mat_3_nm5", "mat_4_nm5", "mat_5_nm5", "mat_6_nm5", "prod_cat_2_nm5", "prod_cat_3_nm5", "taste_1_nm5", "taste_2_nm5", "taste_3_nm5", "txtre_1_nm5", "txtre_2_nm5", "txtre_3_nm5", "key_nm5", 105));
-            repository.save(new QueryResult("6", "brand_nm6", "func_nm6", "maker_nm6", "mat_1_nm6", "mat_2_nm6", "mat_3_nm6", "mat_4_nm6", "mat_5_nm6", "mat_6_nm6", "prod_cat_2_nm6", "prod_cat_3_nm6", "taste_1_nm6", "taste_2_nm6", "taste_3_nm6", "txtre_1_nm6", "txtre_2_nm6", "txtre_3_nm6", "key_nm6", 106));
-            repository.save(new QueryResult("7", "brand_nm7", "func_nm7", "maker_nm7", "mat_1_nm7", "mat_2_nm7", "mat_3_nm7", "mat_4_nm7", "mat_5_nm7", "mat_6_nm7", "prod_cat_2_nm7", "prod_cat_3_nm7", "taste_1_nm7", "taste_2_nm7", "taste_3_nm7", "txtre_1_nm7", "txtre_2_nm7", "txtre_3_nm7", "key_nm7", 107));
-            repository.save(new QueryResult("8", "brand_nm8", "func_nm8", "maker_nm8", "mat_1_nm8", "mat_2_nm8", "mat_3_nm8", "mat_4_nm8", "mat_5_nm8", "mat_6_nm8", "prod_cat_2_nm8", "prod_cat_3_nm8", "taste_1_nm8", "taste_2_nm8", "taste_3_nm8", "txtre_1_nm8", "txtre_2_nm8", "txtre_3_nm8", "key_nm8", 108));
-            repository.save(new QueryResult("9", "brand_nm9", "func_nm9", "maker_nm9", "mat_1_nm9", "mat_2_nm9", "mat_3_nm9", "mat_4_nm9", "mat_5_nm9", "mat_6_nm9", "prod_cat_2_nm9", "prod_cat_3_nm9", "taste_1_nm9", "taste_2_nm9", "taste_3_nm9", "txtre_1_nm9", "txtre_2_nm9", "txtre_3_nm9", "key_nm9", 109));
+            repository.save( new PredictModel( "201701", "brand_nm01_func_nm01_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "brand_nm01_func_nm01_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 30 ) );
+            repository.save( new PredictModel( "201702", "brand_nm02_func_nm02_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm02", 20 ) );
+            repository.save( new PredictModel( "201703", "brand_nm03_func_nm03_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm03", 10 ) );
+            repository.save( new PredictModel( "201704", "brand_nm04_func_nm04_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm04", 10 ) );
+            repository.save( new PredictModel( "201705", "brand_nm05_func_nm05_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm05", 15 ) );
+            repository.save( new PredictModel( "201706", "brand_nm06_func_nm06_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm06", 110 ) );
+            repository.save( new PredictModel( "201707", "brand_nm07_func_nm07_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm07", 10 ) );
+            repository.save( new PredictModel( "201708", "brand_nm08_func_nm08_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "brand_nm08_func_nm08_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
+            repository.save( new PredictModel( "201709", "brand_nm09_func_nm09_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "brand_nm09_func_nm09_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
+            repository.save( new PredictModel( "201710", "brand_nm10_func_nm10_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm10", 110 ) );
+            repository.save( new PredictModel( "201711", "brand_nm11_func_nm11_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm11", 14440 ) );
+            repository.save( new PredictModel( "201712", "brand_nm12_func_nm12_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", "key_nm12", 10 ) );
 
+            versionRepository.save( new PredictVersion( "201701", "description201701", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201702", "description201702", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201703", "description201703", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201704", "description201704", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201705", "description201705", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201706", "description201706", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201707", "description201707", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201708", "description201708", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201709", "description201709", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201710", "description201710", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201711", "description201711", "http://localhost:8080/predit" ) );
+            versionRepository.save( new PredictVersion( "201712", "description201712", "http://localhost:8080/predit" ) );
             // fetch all customers
-            log.info("QueryResult found with findAll():");
-            log.info("-------------------------------");
-            for (QueryResult result : repository.findAll()) {
-                log.info(result.toString());
+            log.info( "QueryResult found with findAll():" );
+            log.info( "-------------------------------" );
+            for (PredictModel result : repository.findAll()) {
+                log.info( result.toString() );
             }
-            log.info("");
+            for (PredictVersion result : versionRepository.findAll()) {
+                log.info( result.toString() );
+            }
+            log.info( "" );
         };
     }
 

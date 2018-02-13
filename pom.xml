@@ -24,6 +24,7 @@
 		<io.springfox.version>2.2.2</io.springfox.version>
 		<lombok.version>1.16.18</lombok.version>
 		<httpclient.version>4.5</httpclient.version>
+		<ehcache.version>2.10.4</ehcache.version>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -110,6 +111,20 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
+
+		<!-- ehcache -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
 
 	</dependencies>
 

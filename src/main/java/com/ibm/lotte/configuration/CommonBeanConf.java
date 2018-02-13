@@ -14,36 +14,28 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class CommonBeanConf {
 
-	@Value("${connection.maxtotalconn}")
-	int maxTotalConn;
-	@Value("${connection.maxperchannel}")
-	int maxPerChannel;
-	@Value("${connection.connectiontimeout}")
-	int connectionTimeout;
+    @Value("${connection.maxtotalconn}")
+    int maxTotalConn;
+    @Value("${connection.maxperchannel}")
+    int maxPerChannel;
+    @Value("${connection.connectiontimeout}")
+    int connectionTimeout;
 
-	@Bean
-	public ClientHttpRequestFactory createRequestFactory(@Value("${connection.timeout}") String maxConn) {
-		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-		connectionManager.setMaxTotal(maxTotalConn);
-		connectionManager.setDefaultMaxPerRoute(maxPerChannel);
+    @Bean
+    public ClientHttpRequestFactory createRequestFactory(@Value("${connection.timeout}") String maxConn) {
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+        connectionManager.setMaxTotal( maxTotalConn );
+        connectionManager.setDefaultMaxPerRoute( maxPerChannel );
 
-		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).build();
-		CloseableHttpClient httpClient = HttpClientBuilder.create().setConnectionManager(connectionManager)
-				.setDefaultRequestConfig(config).build();
-		return new HttpComponentsClientHttpRequestFactory(httpClient);
-	}
+        RequestConfig config = RequestConfig.custom().setConnectTimeout( connectionTimeout ).build();
+        CloseableHttpClient httpClient = HttpClientBuilder.create().setConnectionManager( connectionManager )
+                .setDefaultRequestConfig( config ).build();
+        return new HttpComponentsClientHttpRequestFactory( httpClient );
+    }
 
-	@Bean
-	public RestTemplate createRestTemplate(ClientHttpRequestFactory factory) {
-		RestTemplate restTemplate = new RestTemplate(factory);
-		// restTemplate.setErrorHandler(new RestResponseErrorHandler());
-		// restTemplate.setMessageConverters(createMessageConverters());
-		return restTemplate;
-	}
-
-	// private List<HttpMessageConverter<?>> createMessageConverters() {
-	// List<HttpMessageConverter<?>> mConverters = new ArrayList<>();
-	// mConverters.add(new MappingJackson2HttpMessageConverter());
-	// return mConverters;
-	// }
+    @Bean
+    public RestTemplate createRestTemplate(ClientHttpRequestFactory factory) {
+        RestTemplate restTemplate = new RestTemplate( factory );
+        return restTemplate;
+    }
 }
