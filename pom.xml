@@ -5,7 +5,11 @@
 
     <groupId>com.ibm.lotte</groupId>
     <artifactId>PredictProduct</artifactId>
+<<<<<<< HEAD
     <version>0.0.3-SNAPSHOT</version>
+=======
+    <version>0.0.1-SNAPSHOT</version>
+>>>>>>> 53571d3... rename feild name from condition to cond cause condition is reserved word
     <packaging>jar</packaging>
 
     <name>PredictProduct</name>

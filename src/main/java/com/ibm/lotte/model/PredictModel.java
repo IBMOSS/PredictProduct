@@ -20,8 +20,13 @@ public class PredictModel implements Serializable {
     @Column(name = "model_ver_no", nullable = false)
     private String version;
 
+<<<<<<< HEAD
     @Column(name = "new_brand_yn", nullable = false)
     private boolean newBrand;
+=======
+    @Column(name = "cond")
+    private String condition;
+>>>>>>> 53571d3... rename feild name from condition to cond cause condition is reserved word
 
     @Column(name = "key_cd", nullable = false)
     private String keyCd;

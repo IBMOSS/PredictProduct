@@ -11,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
+
+import javax.persistence.Id;
+import java.util.List;
+
+import static java.lang.Long.valueOf;
 
 @SpringBootApplication
 @Slf4j
@@ -33,7 +39,12 @@ public class PredictProductApplication implements CommandLineRunner {
         loadAttribute();
     }
 
+
     private void loadPredict() {
+
+        if(!repository.findAll().isEmpty()){
+            return;
+        }
         // save a couple of customers
         repository.save( new PredictModel( "2017-01-01", false, "201806",
                 "brand_cd01_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
@@ -87,6 +98,9 @@ public class PredictProductApplication implements CommandLineRunner {
     }
 
     private void loadAttribute() {
+        if(!attributeRepository.findAll().isEmpty()){
+            return;
+        }
         attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd01", "brand_nm01", "root" ) );
         attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd02", "brand_nm02", "root" ) );
         attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd03", "brand_nm03", "root" ) );

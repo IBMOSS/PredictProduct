@@ -18,4 +18,6 @@ public interface AttributeRepository extends CrudRepository<Attribute, Long> {
     List<Attribute> findByAttributeCategoryCode(String category_code);
 
     List<Attribute> findByAttributeCategoryName(String category_name);
+
+    List<Attribute> findAll();
 }

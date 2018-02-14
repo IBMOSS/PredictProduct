@@ -30,7 +30,7 @@ public class PredictApiController {
     }
 
 
-    //@RequestMapping(value = "/findSample", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/findSample", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     List<PredictModelDto> predictOneBy(@RequestParam(name = "version") String version, @RequestParam(name = "condition") String condition) {
         return predictService.findByQuery( version, Boolean.FALSE, condition ).stream()
