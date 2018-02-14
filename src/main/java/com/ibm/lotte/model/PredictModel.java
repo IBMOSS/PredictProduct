@@ -18,7 +18,7 @@ public class PredictModel implements Serializable {
 
     private String version;
 
-    @Column(name = "condition")
+    @Column(name = "cond")
     private String condition;
 
 
