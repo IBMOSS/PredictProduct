@@ -12,6 +12,6 @@ public interface PredictService {
 
     public List<PredictModel> findByQuery(String version);
 
-    public List<PredictModel> findByQuery(String version, String condition);
+    public List<PredictModel> findByQuery(String version, boolean newBrand, String condition);
 
 }

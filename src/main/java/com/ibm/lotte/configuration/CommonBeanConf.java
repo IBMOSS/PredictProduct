@@ -5,11 +5,13 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 public class CommonBeanConf {
@@ -38,4 +40,14 @@ public class CommonBeanConf {
         RestTemplate restTemplate = new RestTemplate( factory );
         return restTemplate;
     }
+
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean() {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+//        characterEncodingFilter.setForceEncoding( true );
+//        characterEncodingFilter.setEncoding( "UTF-8" );
+//        registrationBean.setFilter( characterEncodingFilter );
+//        return registrationBean;
+//    }
 }

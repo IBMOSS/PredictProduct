@@ -11,7 +11,7 @@ public interface PredictionRepository extends CrudRepository<PredictModel, Long>
 
 	List<PredictModel> findByVersion(String version);
 
-	List<PredictModel> findByVersionAndCondition(String version, String condition);
+	List<PredictModel> findByVersionAndNewBrandAndKeyCd(String version, boolean newBrand, String condition);
 
 	List<PredictModel> findAll();
 

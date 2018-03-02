@@ -1,0 +1,44 @@
+server:
+    port: 7070
+
+connection:
+    connectiontimeout: 100000
+    maxperchannel: 10
+    maxtotalconn: 10
+    timeout: 5000
+
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/predictdb
+    username: tester
+    password: 1111
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+---
+spring:
+  profiles: development
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/predictdb
+    username: predictuser
+    password: passw0rd
+  jpa:
+    hibernate:
+      naming:
+        strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

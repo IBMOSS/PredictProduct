@@ -22,10 +22,6 @@ public class ModelVersionController {
     @Autowired
     VersionRepository versionRepository;
 
-//    @RequestMapping(value = "/hello", method = RequestMethod.POST)
-//    public String hello(String name) {
-//        return hService.getName( name );
-//    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public PredictVersion register(@RequestBody PredictVersionQuery versionNumber) {
@@ -55,5 +51,6 @@ public class ModelVersionController {
         }
         versionRepository.delete( versionRepository.findByVersion( version ) );
     }
+
 
 }

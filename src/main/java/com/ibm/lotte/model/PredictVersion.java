@@ -3,26 +3,27 @@ package com.ibm.lotte.model;
 import lombok.Data;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Entity
+@Entity(name="predict_ver")
 @Data
 public class PredictVersion {
 
     @Id
+    @Column(name = "ver_no", nullable = false)
     String version;
 
+    @Column(name = "description", nullable = false)
     String description;
 
+    @Column(name = "url", nullable = false)
     String url;
 
     @Setter
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "reg_dttm", nullable = false)
     java.util.Date createAt;
 
     public PredictVersion() {
