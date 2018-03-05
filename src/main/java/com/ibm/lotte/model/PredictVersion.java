@@ -4,12 +4,13 @@ import lombok.Data;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity(name="predict_ver")
 @Data
-public class PredictVersion {
+public class PredictVersion implements Serializable {
 
     @Id
     @Column(name = "ver_no", nullable = false)

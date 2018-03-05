@@ -7,13 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Null;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity (name="predict_attribute")// This tells Hibernate to make a table out of this class
 @Data
 @EqualsAndHashCode
-public class Attribute {
+public class Attribute  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
