@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Data
-public class PredictModel implements Serializable {
+public class PredictHistory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,17 +37,17 @@ public class PredictModel implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "reg_dttm", nullable = false)
-    java.util.Date createAt;
+    Date createAt;
 
-    public PredictModel() {
+    public PredictHistory() {
     }
 
-    public PredictModel(String version,
-                        boolean newBrand,
-                        String predWOY,
-                        String keyCd,
-                        String keyNm,
-                        float pred) {
+    public PredictHistory(String version,
+                          boolean newBrand,
+                          String predWOY,
+                          String keyCd,
+                          String keyNm,
+                          float pred) {
         this.version = version;
         this.newBrand = newBrand;
         this.keyCd = keyCd;

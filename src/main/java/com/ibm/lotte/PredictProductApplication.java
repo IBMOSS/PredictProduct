@@ -35,18 +35,34 @@ public class PredictProductApplication implements CommandLineRunner {
 
     private void loadPredict() {
         // save a couple of customers
-        repository.save( new PredictModel( "2017-01-01", false, "201806", "code1", "brand_nm01_func_nm01_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 30 ) );
-        repository.save( new PredictModel( "2017-02-01", false, "201807", "code2", "brand_nm02_func_nm02_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 20 ) );
-        repository.save( new PredictModel( "2017-03-01", false, "201808", "code3", "brand_nm03_func_nm03_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
-        repository.save( new PredictModel( "2017-04-01", false, "201809", "code4", "brand_nm04_func_nm04_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
-        repository.save( new PredictModel( "2017-05-01", false, "201810", "code5", "brand_nm05_func_nm05_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 15 ) );
-        repository.save( new PredictModel( "2017-06-01", false, "201811", "code6", "brand_nm06_func_nm06_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 110 ) );
-        repository.save( new PredictModel( "2017-07-01", false, "201806", "code7", "brand_nm07_func_nm07_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
-        repository.save( new PredictModel( "2017-08-01", false, "201807", "code8", "brand_nm08_func_nm08_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
-        repository.save( new PredictModel( "2017-09-01", false, "201808", "code9", "brand_nm09_func_nm09_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
-        repository.save( new PredictModel( "2017-10-01", false, "201809", "code10", "brand_nm10_func_nm10_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 110 ) );
-        repository.save( new PredictModel( "2017-11-01", false, "201810", "code11", "brand_nm11_func_nm11_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 14440 ) );
-        repository.save( new PredictModel( "2017-12-01", false, "201811", "code12", "brand_nm12_func_nm12_maker_nm0_mat_1_nm0_mat_2_nm0_mat_3_nm0_mat_4_nm0_mat_5_nm0_mat_6_nm0_prod_cat_2_nm0_prod_cat_3_nm0_taste_1_nm0_taste_2_nm0_stritaste_3_nmng0_txtre_1_nm0_txtre_2_nm0_txtre_3_nm0", 10 ) );
+        repository.save( new PredictModel( "2017-01-01", false, "201806",
+                "brand_cd01_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm01_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03"
+                , 30 ) );
+        repository.save( new PredictModel( "2017-02-01", false, "201807",
+                "brand_cd02_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm02_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 20 ) );
+        repository.save( new PredictModel( "2017-03-01", false, "201808",
+                "brand_cd03_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm03_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
+        repository.save( new PredictModel( "2017-04-01", false, "201809",
+                "brand_cd04_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm04_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
+        repository.save( new PredictModel( "2017-05-01", false, "201810",
+                "brand_cd05_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm05_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 15 ) );
+        repository.save( new PredictModel( "2017-06-01", false, "201811",
+                "brand_cd06_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm06_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 110 ) );
+        repository.save( new PredictModel( "2017-07-01", false, "201806",
+                "brand_cd07_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm07_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 14440 ) );
+        repository.save( new PredictModel( "2017-08-01", false, "201807",
+                "brand_cd08_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm08_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
+        repository.save( new PredictModel( "2017-09-01", false, "201808",
+                "brand_cd09_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm09_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
 
         versionRepository.save( new PredictVersion( "2017-01-01", "description201701", "http://localhost:8080/predit" ) );
         versionRepository.save( new PredictVersion( "2017-02-01", "description201702", "http://localhost:8080/predit" ) );
@@ -57,9 +73,7 @@ public class PredictProductApplication implements CommandLineRunner {
         versionRepository.save( new PredictVersion( "2017-07-01", "description201707", "http://localhost:8080/predit" ) );
         versionRepository.save( new PredictVersion( "2017-08-01", "description201708", "http://localhost:8080/predit" ) );
         versionRepository.save( new PredictVersion( "2017-09-01", "description201709", "http://localhost:8080/predit" ) );
-        versionRepository.save( new PredictVersion( "2017-10-01", "description201710", "http://localhost:8080/predit" ) );
-        versionRepository.save( new PredictVersion( "2017-11-01", "description201711", "http://localhost:8080/predit" ) );
-        versionRepository.save( new PredictVersion( "2017-12-01", "description201712", "http://localhost:8080/predit" ) );
+
         // fetch all customers
         log.info( "QueryResult found with findAll():" );
         log.info( "-------------------------------" );
@@ -73,18 +87,70 @@ public class PredictProductApplication implements CommandLineRunner {
     }
 
     private void loadAttribute() {
-        attributeRepository.save( new Attribute( "brand", "브랜드", "bc01", "빼빼로", "root" ) );
-        attributeRepository.save( new Attribute( "brand", "브랜드", "bc02", "칸초", "root" ) );
-        attributeRepository.save( new Attribute( "func", "기능", "fc01", "기호", "brand" ) );
-        attributeRepository.save( new Attribute( "func", "기능", "fc02", "다이어트", "brand" ) );
-        attributeRepository.save( new Attribute( "mat", "식재료", "mat01", "초콜릿", "func" ) );
-        attributeRepository.save( new Attribute( "mat", "식재료", "mat02", "우유", "func" ) );
-        attributeRepository.save( new Attribute( "mat", "식재료", "mat03", "밀가루", "func" ) );
-        attributeRepository.save( new Attribute( "mat", "식재료", "mat04", "콩", "func" ) );
-        attributeRepository.save( new Attribute( "mat", "식재료", "mat05", "옥수수", "func" ) );
-        attributeRepository.save( new Attribute( "taste", "맛", "taste01", "구수하다", "mat" ) );
-        attributeRepository.save( new Attribute( "taste", "맛", "taste02", "달콤하다", "mat" ) );
-        attributeRepository.save( new Attribute( "taste", "맛", "taste03", "부드럽다", "mat" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd01", "brand_nm01", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd02", "brand_nm02", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd03", "brand_nm03", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd04", "brand_nm04", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd05", "brand_nm05", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd06", "brand_nm06", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd07", "brand_nm07", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd08", "brand_nm08", "root" ) );
+        attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd09", "brand_nm09", "root" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd01", "func_nm01", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd02", "func_nm02", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd03", "func_nm03", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd04", "func_nm04", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd05", "func_nm05", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd06", "func_nm06", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd07", "func_nm07", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd08", "func_nm08", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "func_cd", "기능", "func_cd09", "func_nm09", "brand_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd01", "maker_nm01", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd02", "maker_nm02", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd03", "maker_nm03", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd04", "maker_nm04", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd05", "maker_nm05", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd06", "maker_nm06", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd07", "maker_nm07", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd08", "maker_nm08", "func_cd" ) );
+        attributeRepository.save( new Attribute( "maker_cd", "메이커", "maker_cd09", "maker_nm09", "func_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd01", "mat_nm01", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd02", "mat_nm02", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd03", "mat_nm03", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd04", "mat_nm04", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd05", "mat_nm05", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd06", "mat_nm06", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd07", "mat_nm07", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd08", "mat_nm08", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "mat_cd", "재료", "mat_cd09", "mat_nm09", "maker_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd01", "prod_cat_nm01", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd02", "prod_cat_nm02", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd03", "prod_cat_nm03", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd04", "prod_cat_nm04", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd05", "prod_cat_nm05", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd06", "prod_cat_nm06", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd07", "prod_cat_nm07", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd08", "prod_cat_nm08", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "prod_cat_cd", "카테고리", "prod_cat_cd09", "prod_cat_nm09", "mat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd01", "taste_nm01", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd02", "taste_nm02", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd03", "taste_nm03", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd04", "taste_nm04", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd05", "taste_nm05", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd06", "taste_nm06", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd07", "taste_nm07", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd08", "taste_nm08", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "taste_cd", "맛", "taste_cd09", "taste_nm09", "prod_cat_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd01", "txtre_nm01", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd02", "txtre_nm02", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd03", "txtre_nm03", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd04", "txtre_nm04", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd05", "txtre_nm05", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd06", "txtre_nm06", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd07", "txtre_nm07", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd08", "txtre_nm08", "taste_cd" ) );
+        attributeRepository.save( new Attribute( "txtre_cd", "기타", "txtre_cd09", "txtre_nm09", "taste_cd" ) );
+
         for (Attribute attribute : attributeRepository.findAll()) {
             log.info( attribute.toString() );
         }

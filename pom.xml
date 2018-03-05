@@ -5,7 +5,7 @@
 
     <groupId>com.ibm.lotte</groupId>
     <artifactId>PredictProduct</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>PredictProduct</name>
@@ -126,6 +126,12 @@
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
+        </dependency>
+        <!-- model mapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.7.4</version>
         </dependency>
 
     </dependencies>
