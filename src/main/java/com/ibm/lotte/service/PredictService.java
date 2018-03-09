@@ -1,6 +1,9 @@
 package com.ibm.lotte.service;
 
+import com.ibm.lotte.model.PredictHistory;
 import com.ibm.lotte.model.PredictModelDto;
+import com.ibm.lotte.model.PredictModelDtoWithSim;
+import com.ibm.lotte.model.PredictModelQuery;
 
 import java.util.List;
 
@@ -16,4 +19,5 @@ public interface PredictService {
 
     public List<PredictModelDto> findGroupByQuery(String version, String condition);
 
+    public List<PredictModelDtoWithSim> findAllWithSim(List<PredictModelQuery> condition);
 }

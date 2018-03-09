@@ -20,13 +20,8 @@ public class PredictModel implements Serializable {
     @Column(name = "model_ver_no", nullable = false)
     private String version;
 
-<<<<<<< HEAD
     @Column(name = "new_brand_yn", nullable = false)
     private boolean newBrand;
-=======
-    @Column(name = "cond")
-    private String condition;
->>>>>>> 53571d3... rename feild name from condition to cond cause condition is reserved word
 
     @Column(name = "key_cd", nullable = false)
     private String keyCd;
@@ -34,10 +29,10 @@ public class PredictModel implements Serializable {
     @Column(name = "key_nm", nullable = false)
     private String keyNm;
 
-    @Column(name = "std_woy", nullable = false)
+    @Column(name = "prdct_woy", nullable = false)
     private String predWOY;
 
-    @Column(name = "combi_idx", nullable = false)
+    @Column(name = "prdct_sell_amt", nullable = false)
     private float pred;
 
     @Temporal(TemporalType.TIMESTAMP)

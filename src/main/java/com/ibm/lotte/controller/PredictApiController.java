@@ -1,6 +1,7 @@
 package com.ibm.lotte.controller;
 
 import com.ibm.lotte.model.PredictModelDto;
+import com.ibm.lotte.model.PredictModelDtoWithSim;
 import com.ibm.lotte.model.PredictModelQuery;
 import com.ibm.lotte.service.PredictService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +40,11 @@ public class PredictApiController {
 
     @RequestMapping(value = "/findgroup", method = RequestMethod.POST)
     public @ResponseBody
-    List<PredictModelDto> predictGroupBy(@RequestBody PredictModelQuery condition) {
+    List<PredictModelDtoWithSim> predictGroupBy(@RequestBody List<PredictModelQuery> condition) {
 
-        return predictService.findAll().stream().sorted( Comparator.comparing( PredictModelDto::getPred ).reversed() ).collect( Collectors.toList() );
+        return predictService.findAllWithSim(condition).stream()
+                .sorted( Comparator.comparing( PredictModelDtoWithSim::getPred ).reversed() )
+                .collect( Collectors.toList() );
     }
 
 

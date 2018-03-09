@@ -1,8 +1,6 @@
 package com.ibm.lotte.service.impl;
 
-import com.ibm.lotte.model.PredictHistory;
-import com.ibm.lotte.model.PredictModel;
-import com.ibm.lotte.model.PredictModelDto;
+import com.ibm.lotte.model.*;
 import com.ibm.lotte.repository.HelloRepository;
 import com.ibm.lotte.repository.PredictionHistoryRepository;
 import com.ibm.lotte.repository.PredictionRepository;
@@ -12,7 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,13 +101,37 @@ public class PredictServiceImpl implements PredictService {
                 .collect( Collectors.toList() );
     }
 
+    @Override
+    public List<PredictModelDtoWithSim> findAllWithSim(List<PredictModelQuery> queryList) {
+
+        List<PredictModel> rsModel = predictionRepository.findAll();
+        List<PredictModelDtoWithSim> dtoList = new ArrayList<>();
+        List<Double> flist = Arrays.asList( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 );
+        // search predict list;
+        if (!rsModel.isEmpty()) {
+            rsModel.stream()
+                    .map( pm -> convertPredictModelToPredictModelDtoWithSim( pm ) )
+                    .forEach( (PredictModelDtoWithSim ph) -> {
+                        ph.setPrediction( Arrays.asList( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 ) );
+                        Map<String, List<Double>> mm = new HashMap<>();
+                        mm.put( "sim1xxxxx", flist );
+                        ph.setSim1( mm );
+                        ph.setSim2( mm );
+                        ph.setSim3( mm );
+                        dtoList.add( ph );
+                    } );
+        }
+
+        return dtoList;
+    }
+
     private PredictModelDto convertPredictHistoryToDto(PredictHistory predictHistory) {
 
         return modelMapper.map( predictHistory, PredictModelDto.class );
     }
 
     private PredictModelDto convertPredictModelToDto(PredictModel predictModel) {
-        if(predictModel == null ){
+        if (predictModel == null) {
             return null;
         }
         return modelMapper.map( predictModel, PredictModelDto.class );
@@ -118,4 +140,10 @@ public class PredictServiceImpl implements PredictService {
     private PredictHistory convertPredictModelToPredictHistory(PredictModel predictModel) {
         return modelMapper.map( predictModel, PredictHistory.class );
     }
+
+    private PredictModelDtoWithSim convertPredictModelToPredictModelDtoWithSim(PredictModel predictModel) {
+        return modelMapper.map( predictModel, PredictModelDtoWithSim.class );
+    }
+
+
 }
