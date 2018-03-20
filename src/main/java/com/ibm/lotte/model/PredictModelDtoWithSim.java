@@ -21,21 +21,19 @@ public class PredictModelDtoWithSim implements Serializable {
 
     private String keyNm;
 
-    private String predWOY;
+    private float prdctSellAmt;
 
-    private float pred;
+    private List<Float> prediction;
 
-    private List<Double> prediction;
+    private Sim sim1;
 
-    private Map<String, List<Double>> sim1;
+    private Sim sim2;
 
-    private Map<String, List<Double>> sim2;
+    private Sim sim3;
 
-    private Map<String, List<Double>> sim3;
+    private Sim sim4;
 
-    private Map<String, List<Double>> sim4;
-
-    private Map<String, List<Double>> sim5;
+    private Sim sim5;
 
 
     @Setter
@@ -46,23 +44,21 @@ public class PredictModelDtoWithSim implements Serializable {
 
     public PredictModelDtoWithSim(String version,
                                   boolean newBrand,
-                                  String predWOY,
                                   String keyCd,
                                   String keyNm,
-                                  float pred,
-                                  List prediction,
-                                  Map sim1,
-                                  Map sim2,
-                                  Map sim3,
-                                  Map sim4,
-                                  Map sim5,
+                                  float prdctSellAmt,
+                                  List<Float> prediction,
+                                  Sim sim1,
+                                  Sim sim2,
+                                  Sim sim3,
+                                  Sim sim4,
+                                  Sim sim5,
                                   Date createAt) {
         this.version = version;
         this.newBrand = newBrand;
         this.keyCd = keyCd;
         this.keyNm = keyNm;
-        this.predWOY = predWOY;
-        this.pred = pred;
+        this.prdctSellAmt = prdctSellAmt;
         this.prediction = prediction;
         this.sim1 = sim1;
         this.sim2 = sim2;

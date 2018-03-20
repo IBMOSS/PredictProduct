@@ -1,5 +1,6 @@
 package com.ibm.lotte.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.lotte.model.*;
 import com.ibm.lotte.repository.HelloRepository;
 import com.ibm.lotte.repository.PredictionHistoryRepository;
@@ -10,7 +11,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +32,9 @@ public class PredictServiceImpl implements PredictService {
 
     @Autowired
     ModelMapper modelMapper;
+
+
+    ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public String query(String name) {
@@ -106,20 +113,32 @@ public class PredictServiceImpl implements PredictService {
 
         List<PredictModel> rsModel = predictionRepository.findAll();
         List<PredictModelDtoWithSim> dtoList = new ArrayList<>();
-        List<Double> flist = Arrays.asList( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 );
-        // search predict list;
+
         if (!rsModel.isEmpty()) {
             rsModel.stream()
-                    .map( pm -> convertPredictModelToPredictModelDtoWithSim( pm ) )
-                    .forEach( (PredictModelDtoWithSim ph) -> {
-                        ph.setPrediction( Arrays.asList( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 ) );
-                        Map<String, List<Double>> mm = new HashMap<>();
-                        mm.put( "sim1xxxxx", flist );
-                        ph.setSim1( mm );
-                        ph.setSim2( mm );
-                        ph.setSim3( mm );
-                        dtoList.add( ph );
+                    .forEach( (PredictModel pm) -> {
+                        if (predictionHistoryRepository.findByVersionAndNewBrandAndKeyCd( pm.getVersion(), Boolean.FALSE, pm.getKeyCd() ).isEmpty()) {
+                            PredictHistory phh = new PredictHistory(
+                                    pm.getVersion(), Boolean.FALSE, pm.getKeyCd(), pm.getKeyNm(), pm.getPrdctSellAmt(),
+                                    pm.getPredictionStr(), pm.getSim1(), pm.getSim2(), pm.getSim3(), pm.getSim4(), pm.getSim5() );
+                            predictionHistoryRepository.save( phh );
+                        }
+                        dtoList.add( convertPredictModelToPredictModelDtoWithSim( pm ) );
                     } );
+        }
+
+
+        return dtoList;
+    }
+
+    @Override
+    public List<PredictModelDtoWithSim> findHistory(PredictHistoryQuery query) {
+
+        List<PredictHistory> rsModel = predictionHistoryRepository.findByVersion( query.getVersionNo() );
+        List<PredictModelDtoWithSim> dtoList = new ArrayList<>();
+        if (!rsModel.isEmpty()) {
+            dtoList = rsModel.stream()
+                    .map( ph -> convertPredictHistoryToPredictModelDtoWithSim( ph ) ).collect( Collectors.toList() );
         }
 
         return dtoList;
@@ -138,12 +157,65 @@ public class PredictServiceImpl implements PredictService {
     }
 
     private PredictHistory convertPredictModelToPredictHistory(PredictModel predictModel) {
-        return modelMapper.map( predictModel, PredictHistory.class );
+        PredictHistory rs = modelMapper.map( predictModel, PredictHistory.class );
+        return rs;
     }
+
+    private PredictModelDtoWithSim convertPredictHistoryToPredictModelDtoWithSim(PredictHistory ph) {
+        PredictModelDtoWithSim rs = modelMapper.map( ph, PredictModelDtoWithSim.class );
+        try {
+            if (ph.getSim1() != null) {
+                rs.setSim1( mapper.readValue( ph.getSim1(), Sim.class ) );
+            }
+            if (ph.getSim2() != null) {
+                rs.setSim2( mapper.readValue( ph.getSim2(), Sim.class ) );
+            }
+            if (ph.getSim3() != null) {
+                rs.setSim3( mapper.readValue( ph.getSim3(), Sim.class ) );
+            }
+            if (ph.getSim4() != null) {
+                rs.setSim4( mapper.readValue( ph.getSim4(), Sim.class ) );
+            }
+            if (ph.getSim5() != null) {
+                rs.setSim5( mapper.readValue( ph.getSim5(), Sim.class ) );
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+        return rs;
+    }
+
 
     private PredictModelDtoWithSim convertPredictModelToPredictModelDtoWithSim(PredictModel predictModel) {
-        return modelMapper.map( predictModel, PredictModelDtoWithSim.class );
+        PredictModelDtoWithSim rs = modelMapper.map( predictModel, PredictModelDtoWithSim.class );
+        try {
+            if (predictModel.getSim1() != null) {
+                rs.setSim1( mapper.readValue( predictModel.getSim1(), Sim.class ) );
+            }
+            if (predictModel.getSim2() != null) {
+                rs.setSim2( mapper.readValue( predictModel.getSim2(), Sim.class ) );
+            }
+            if (predictModel.getSim3() != null) {
+                rs.setSim3( mapper.readValue( predictModel.getSim3(), Sim.class ) );
+            }
+            if (predictModel.getSim4() != null) {
+                rs.setSim4( mapper.readValue( predictModel.getSim4(), Sim.class ) );
+            }
+            if (predictModel.getSim5() != null) {
+                rs.setSim5( mapper.readValue( predictModel.getSim5(), Sim.class ) );
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+        return rs;
     }
 
+    private PredictModelDto convertPredictModelToPredictModelDto(PredictHistory predictHistory) {
+        return modelMapper.map( predictHistory, PredictModelDto.class );
+    }
 
 }

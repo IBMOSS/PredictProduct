@@ -1,11 +1,16 @@
 package com.ibm.lotte;
 
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.lotte.model.Attribute;
 import com.ibm.lotte.model.PredictModel;
 import com.ibm.lotte.model.PredictVersion;
+import com.ibm.lotte.model.Sim;
 import com.ibm.lotte.repository.AttributeRepository;
 import com.ibm.lotte.repository.PredictionRepository;
 import com.ibm.lotte.repository.VersionRepository;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +19,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Profile;
 
 import javax.persistence.Id;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Long.valueOf;
 
@@ -40,40 +48,140 @@ public class PredictProductApplication implements CommandLineRunner {
     }
 
 
-    private void loadPredict() {
+    private void loadPredict() throws JsonProcessingException {
 
-        if(!repository.findAll().isEmpty()){
+        if (!repository.findAll().isEmpty()) {
             return;
         }
+
+        ObjectMapper mapper = new ObjectMapper();
+        String sim = mapper.writeValueAsString( new Sim( "simcd", "simnm", Arrays.asList( 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f ) ) );
         // save a couple of customers
-        repository.save( new PredictModel( "2017-01-01", false, "201806",
+        repository.save( new PredictModel( "2017-01-01", false,
                 "brand_cd01_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm01_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03"
-                , 30 ) );
-        repository.save( new PredictModel( "2017-02-01", false, "201807",
+                "brand_nm01_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                130, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+
+        repository.save( new PredictModel( "2017-02-01", false,
                 "brand_cd02_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm02_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 20 ) );
-        repository.save( new PredictModel( "2017-03-01", false, "201808",
+                "brand_nm02_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1301, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-01-01", false,
+                "brand_cd01_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm01_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1302, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-03-01", false,
                 "brand_cd03_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm03_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
-        repository.save( new PredictModel( "2017-04-01", false, "201809",
+                "brand_nm03_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1303, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-04-01", false,
                 "brand_cd04_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm04_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
-        repository.save( new PredictModel( "2017-05-01", false, "201810",
+                "brand_nm04_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                130, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-05-01", false,
                 "brand_cd05_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm05_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 15 ) );
-        repository.save( new PredictModel( "2017-06-01", false, "201811",
+                "brand_nm05_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1305, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-06-01", false,
                 "brand_cd06_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm06_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 110 ) );
-        repository.save( new PredictModel( "2017-07-01", false, "201806",
+                "brand_nm06_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1306, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-07-01", false,
                 "brand_cd07_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm07_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 14440 ) );
-        repository.save( new PredictModel( "2017-08-01", false, "201807",
+                "brand_nm07_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1307, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-08-01", false,
                 "brand_cd08_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm08_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
-        repository.save( new PredictModel( "2017-09-01", false, "201808",
+                "brand_nm08_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1308, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-09-01", false,
                 "brand_cd09_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
-                "brand_nm09_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03", 10 ) );
+                "brand_nm09_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1301, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+        repository.save( new PredictModel( "2017-010-01", false,
+                "brand_cd010_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+                "brand_nm010_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+                1300, "0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0", sim, sim, sim, sim, sim ) );
+//        repository.save( new PredictModel( "2017-02-01", false,
+//                "brand_cd02_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm02_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 230, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//        ;
+//        repository.save( new PredictModel( "2017-03-01", false,
+//                "brand_cd03_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm03_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 330, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//        ;
+//        repository.save( new PredictModel( "2017-04-01", false,
+//                "brand_cd04_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm04_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 430, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//        ;
+//        repository.save( new PredictModel( "2017-05-01", false,
+//                "brand_cd05_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm05_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 630, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//        ;
+//        repository.save( new PredictModel( "2017-06-01", false,
+//                "brand_cd06_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm06_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 30, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//        ;
+//        repository.save( new PredictModel( "2017-07-01", false,
+//                "brand_cd07_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm07_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 330, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//
+//        repository.save( new PredictModel( "2017-08-01", false,
+//                "brand_cd08_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm08_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 330, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+//
+//        repository.save( new PredictModel( "2017-09-01", false,
+//                "brand_cd09_func_cd01_maker_cd01_mat_cd01_mat_cd02_mat_cd03_mat_cd04_mat_cd05_mat_cd06_prod_cat_cd01_prod_cat_cd02_taste_cd01_taste_cd02_taste_cd03_txtre_cd01_txtre_cd02_txtre_cd03",
+//                "brand_nm09_func_nm01_maker_nm01_mat_nm01_mat_nm02_mat_nm03_mat_nm04_mat_nm05_mat_nm06_prod_cat_nm01_prod_cat_nm02_taste_nm01_taste_nm02_taste_nm03_txtre_nm01_txtre_nm02_txtre_nm03",
+//                 330, " [ 0,1,2,3,4,5,6,7 ] ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } ",
+//                " { \"key_cd\" : \"simcd\" , \"key_nm\" : \"simnm\" , \"values\" :  [ 0,1,2,3,4,5,6,7 ] } " ) );
+
 
         versionRepository.save( new PredictVersion( "2017-01-01", "description201701", "http://localhost:8080/predit" ) );
         versionRepository.save( new PredictVersion( "2017-02-01", "description201702", "http://localhost:8080/predit" ) );
@@ -98,7 +206,7 @@ public class PredictProductApplication implements CommandLineRunner {
     }
 
     private void loadAttribute() {
-        if(!attributeRepository.findAll().isEmpty()){
+        if (!attributeRepository.findAll().isEmpty()) {
             return;
         }
         attributeRepository.save( new Attribute( "brand_cd", "브랜드", "brand_cd01", "brand_nm01", "root" ) );
@@ -176,3 +284,4 @@ public class PredictProductApplication implements CommandLineRunner {
     }
 
 }
+

@@ -4,9 +4,11 @@ package com.ibm.lotte.model;
 import lombok.Data;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class PredictModelDto implements Serializable {
@@ -19,9 +21,9 @@ public class PredictModelDto implements Serializable {
 
     private String keyNm;
 
-    private String predWOY;
+    private float prdctSellAmt;
 
-    private float pred;
+    private List<Float> prediction;
 
     @Setter
     private Date createAt;
@@ -31,17 +33,17 @@ public class PredictModelDto implements Serializable {
 
     public PredictModelDto(String version,
                            boolean newBrand,
-                           String predWOY,
                            String keyCd,
                            String keyNm,
-                           float pred,
+                           float prdctSellAmt,
+                           List<Float> prediction,
                            Date createAt) {
         this.version = version;
         this.newBrand = newBrand;
         this.keyCd = keyCd;
         this.keyNm = keyNm;
-        this.predWOY = predWOY;
-        this.pred = pred;
+        this.prdctSellAmt = prdctSellAmt;
+        this.prediction = prediction;
         this.createAt = createAt;
     }
 

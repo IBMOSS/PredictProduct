@@ -13,6 +13,8 @@ public interface PredictionHistoryRepository extends CrudRepository<PredictHisto
 
     List<PredictHistory> findByVersion(String version);
 
+    List<PredictHistory> findByVersionAndCreateAt(String version, Date createAt);
+
     List<PredictHistory> findByVersionAndNewBrandAndKeyCd(String version, boolean newBrand, String condition);
 
     List<PredictHistory> findByVersionAndKeyCd(String version, String condition);

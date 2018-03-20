@@ -1,5 +1,6 @@
 package com.ibm.lotte.controller;
 
+import com.ibm.lotte.model.PredictHistoryQuery;
 import com.ibm.lotte.model.PredictModelDto;
 import com.ibm.lotte.model.PredictModelDtoWithSim;
 import com.ibm.lotte.model.PredictModelQuery;
@@ -27,7 +28,7 @@ public class PredictApiController {
     public @ResponseBody
     List<PredictModelDto> predictOneBy(@RequestBody PredictModelQuery condition) {
         return predictService.findByQuery( condition.getVersion(), condition.isNewBrand(), condition.toCondition() ).stream()
-                .sorted( Comparator.comparing( PredictModelDto::getPred ).reversed() ).collect( Collectors.toList() );
+                .sorted( Comparator.comparing( PredictModelDto::getPrdctSellAmt ).reversed() ).collect( Collectors.toList() );
     }
 
 
@@ -35,7 +36,7 @@ public class PredictApiController {
     public @ResponseBody
     List<PredictModelDto> predictOneBy(@RequestParam(name = "version") String version, @RequestParam(name = "condition") String condition) {
         return predictService.findByQuery( version, Boolean.FALSE, condition ).stream()
-                .sorted( Comparator.comparing( PredictModelDto::getPred ).reversed() ).collect( Collectors.toList() );
+                .sorted( Comparator.comparing( PredictModelDto::getPrdctSellAmt ).reversed() ).collect( Collectors.toList() );
     }
 
     @RequestMapping(value = "/findgroup", method = RequestMethod.POST)
@@ -43,9 +44,16 @@ public class PredictApiController {
     List<PredictModelDtoWithSim> predictGroupBy(@RequestBody List<PredictModelQuery> condition) {
 
         return predictService.findAllWithSim(condition).stream()
-                .sorted( Comparator.comparing( PredictModelDtoWithSim::getPred ).reversed() )
+                .sorted( Comparator.comparing( PredictModelDtoWithSim::getPrdctSellAmt ).reversed() )
                 .collect( Collectors.toList() );
     }
 
+    @RequestMapping(value = "/findhistory", method = RequestMethod.POST)
+    public @ResponseBody
+    List<PredictModelDtoWithSim> predictHistory(@RequestBody PredictHistoryQuery condition) {
 
+        return predictService.findHistory(condition).stream()
+                .sorted( Comparator.comparing( PredictModelDtoWithSim::getPrdctSellAmt ).reversed() )
+                .collect( Collectors.toList() );
+    }
 }
