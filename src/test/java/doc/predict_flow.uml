@@ -1,23 +1,20 @@
 @startuml
 
 controller --> predict_service
+alt  on old history case
+
 alt successful on old history case
 predict_service --> predict_history
 predict_history --> predict_service
-predict_service --> controller
-end
-
-alt successful on result of predict case case
-predict_service --> result_of_predict
-result_of_predict --> predict_service
-predict_service --> controller
 end
 
 alt successful on active tensorflow case
 predict_service --> active_tensorflow
 active_tensorflow --> predict_service
 predict_service --> predict_history
-predict_service --> controller
 end
+
+predict_service --> controller
+
 
 @enduml
